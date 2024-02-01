@@ -3,6 +3,7 @@ const dotenv = require('dotenv')
 const cors = require('cors')
 const userRouter = require('./routes/user.route')
 const authRouter = require('./routes/auth.route')
+const handleErrorMiddleware = require('./middlewares/error.middleware')
 dotenv.config()
 const app = express()
 app.use(express.json())
@@ -12,4 +13,5 @@ app.get("/healthy", (req, res) => {
 })
 app.use('/api/user', userRouter)
 app.use('/api/auth', authRouter)
+app.use(handleErrorMiddleware)
 module.exports = app
