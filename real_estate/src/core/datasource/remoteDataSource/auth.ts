@@ -4,7 +4,7 @@ export const authDataSource = {
   signup: async (data: {}) => {
     try {
       const response = await sendRequest({
-        route: "/api/auth/signu",
+        route: "/api/auth/signup",
         method: "POST",
         body: data
       })
