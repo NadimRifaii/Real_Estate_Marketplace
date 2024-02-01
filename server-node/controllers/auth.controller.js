@@ -8,7 +8,7 @@ async function signUp(req, res) {
     const result = await newUser.save()
     return res.status(201).json({ "message": "User created successfully", result })
   } catch (error) {
-    return res.status(200).json({ error })
+    return res.status(200).json({ "message": error.message })
   }
 }
 async function signIn(req, res) {
