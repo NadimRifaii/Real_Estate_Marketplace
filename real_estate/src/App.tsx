@@ -1,9 +1,9 @@
 import { Routes, Route } from 'react-router-dom'
-import Home from './pages/home-page'
-import SignIn from './pages/signin-page'
-import SignUp from './pages/signup-page'
-import About from './pages/about-page'
-import Profile from './pages/profile-page'
+import Home from './pages/home/home-page'
+import SignIn from './pages/signin/signin-page'
+import SignUp from './pages/signup/signup-page'
+import About from './pages/about/about-page'
+import Profile from './pages/profile/profile-page'
 import Header from './components/header/header.component'
 
 function App() {
