@@ -2,6 +2,7 @@ import { sendRequest } from "../../helpers/request";
 
 export const authDataSource = {
   signup: async (data: {}) => {
+    console.log(data)
     try {
       const response = await sendRequest({
         route: "/api/auth/signup",
@@ -10,7 +11,7 @@ export const authDataSource = {
       })
       return response
     } catch (error: any) {
-      console.log(error)
+      throw new Error(error.message)
     }
   }
 }

@@ -5,3 +5,4 @@ const local = (key: string, value?: any) => {
     return localStorage.getItem(key)
   }
 }
+export default local

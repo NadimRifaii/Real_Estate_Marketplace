@@ -3,6 +3,9 @@ const errorHandler = require('../utils/error')
 const bcryptjs = require('bcryptjs')
 async function signUp(req, res, next) {
   const { username, email, password } = req.body
+  if (!username || !email || !password) {
+    return res.status(400).json({ "message": "Invalid credentials" })
+  }
   const hashedPassword = bcryptjs.hashSync(password, 10);
   const newUser = new UserModel({ username, email, password: hashedPassword })
   try {

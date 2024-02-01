@@ -1,4 +1,5 @@
 import axios from 'axios'
+import local from './localStorage'
 
 type SendRequestRequirements = {
   route: string,
@@ -7,7 +8,7 @@ type SendRequestRequirements = {
 }
 export const sendRequest = async ({ route, method = "GET", body }: SendRequestRequirements) => {
   const token = local("token")
-  const baseURL = "http://localhost:5000"
+  const baseURL = import.meta.env.VITE_BASE_URL
   try {
     const response = await axios.request({
       url: route,
@@ -15,10 +16,13 @@ export const sendRequest = async ({ route, method = "GET", body }: SendRequestRe
       method,
       baseURL,
       headers: {
+        "Content-Type": "application/json"
       }
     });
     return response.data
   } catch (error: any) {
-    console.log(error)
+    if (error.response) {
+      throw new Error(error.response.data.message)
+    }
   }
 }

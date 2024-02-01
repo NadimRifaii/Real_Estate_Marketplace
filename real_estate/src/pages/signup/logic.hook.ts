@@ -6,8 +6,18 @@ type Request = {
   username: string,
   password: string
 }
+const defaultCredentials: Request = {
+  email: "",
+  username: "",
+  password: ""
+}
 const useLogic = () => {
-  const [request, setRequest] = useState<Request>({} as Request)
+  const [request, setRequest] = useState<Request>(defaultCredentials)
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    console.log(error)
+  }, [error])
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRequest((prevState) => {
       const key: keyof Request = event.target.id as keyof Request
@@ -15,13 +25,16 @@ const useLogic = () => {
     })
   }
   const signup = async () => {
+    setLoading(true)
     try {
       const response = await authDataSource.signup(request)
-      console.log(response)
-    } catch (error) {
-      console.log(error)
+      setRequest({ ...defaultCredentials })
+      setLoading(false)
+    } catch (error: any) {
+      setError(error.message)
+      setLoading(false)
     }
   }
-  return { changeHandler,signup }
+  return { changeHandler, signup, error, request }
 }
 export default useLogic
