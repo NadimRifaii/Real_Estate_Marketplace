@@ -5,12 +5,9 @@ const userSchema = new mongoose.Schema({
     required: true,
     minLength: 4
   },
-  profilePicture: {
-    type: String
-  }
-  ,
   email: {
     type: String,
+    unique: true,
     required: true,
     validate: {
       validator: (value) => /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value),
