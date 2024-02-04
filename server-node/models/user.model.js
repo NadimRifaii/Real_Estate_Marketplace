@@ -49,6 +49,10 @@ const userSchema = new mongoose.Schema({
       validator: (value) => value.length > 6,
       message: "Short password"
     }
+  },
+  photoURL: {
+    type: String,
+    default: `https://th.bing.com/th/id/OIP.8DDnZg9-q5BkyTcfOAYsbwHaGA?rs=1&pid=ImgDetMain`
   }
 }, {
   timestamps: true

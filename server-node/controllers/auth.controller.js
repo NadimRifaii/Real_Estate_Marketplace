@@ -44,7 +44,24 @@ async function login(req, res) {
     return handleErrors(error, res)
   }
 }
+async function google(req, res) {
+  const { email, username, photoURL } = req.body
+  if (!email || !username || !photoURL)
+    throw new Error("Invalid credentials")
+  try {
+    const user = await UserModel.findOne({ email })
+    if (!user) {
+      const generatePassword = Math.random().toString(36).slice(-8)
+      await UserModel.create({ username, email, password: generatePassword, photoURL })
+    }
+    const token = jwt.sign({ email, username }, process.env.SECRET)
+    return res.status(200).json({ token })
+  } catch (error) {
+    return handleErrors(error, res)
+  }
+}
 module.exports = {
   signup,
-  login
+  login,
+  google
 }

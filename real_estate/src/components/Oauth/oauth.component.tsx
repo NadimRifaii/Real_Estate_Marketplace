@@ -1,14 +1,22 @@
+import { useDispatch } from "react-redux"
+import { authDataSource } from "../../core/datasource/remoteDataSource/auth"
 import { signInWithGooglePopup } from "../../core/datasource/remoteDataSource/firebase"
-import { sendRequest } from "../../core/helpers/request"
+import { setUser } from "../../core/datasource/localDataSource/user/userSlice"
+import local from "../../core/helpers/localStorage"
 
 const Oauth = () => {
+  const dispatch = useDispatch()
   const handleGoogleClick = async () => {
     try {
-      const response = await signInWithGooglePopup()
-      const { email, displayName, photoURL } = response.user
-      console.log(email, displayName, photoURL)
+      let response = await signInWithGooglePopup()
+      const { email, displayName: username, photoURL } = response.user
+      response = await authDataSource.google({ email, username, photoURL })
+      if (email && username && photoURL) {
+        dispatch(setUser({ email, username, photoURL }))
+        local("user", JSON.stringify({ email, username, photoURL }))
+      }
     } catch (error) {
-      console.log("Could not signin with google")
+      console.log(error)
     }
   }
   return (

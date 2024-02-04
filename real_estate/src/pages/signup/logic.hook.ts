@@ -31,8 +31,8 @@ const useLogic = () => {
       setRequest({ ...defaultCredentials })
       setLoading(false)
       dispatch(setUser(response.user))
-      // local("user", JSON.stringify(response.user))
-      console.log(JSON.stringify(response.user))
+      local("user", JSON.stringify(response.user))
+      setError("")
     } catch (error: any) {
       setError(error.message)
       setLoading(false)

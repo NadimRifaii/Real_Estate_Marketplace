@@ -35,6 +35,8 @@ export const authDataSource = {
         method: "POST",
         data
       })
+      local("access_token", response.token)
+      return response
     } catch (error: any) {
       throw new Error(error)
     }

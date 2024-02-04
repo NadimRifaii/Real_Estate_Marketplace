@@ -3,7 +3,8 @@ import { User } from "../../../types/user";
 import { RootState } from "../../../types/rootState";
 const initialState: User = {
   email: "",
-  username: ""
+  username: "",
+  photoURL: ''
 }
 const userSlice = createSlice({
   name: "user",
