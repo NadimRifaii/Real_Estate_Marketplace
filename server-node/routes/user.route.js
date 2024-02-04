@@ -8,9 +8,9 @@ const storage = multer.diskStorage({
     cb(null, req.user.email + '-' + file.originalname)
   }
 })
-// const upload = multer({ dest: 'public/images' })//where we want to save the files
-const upload = multer({ storage })//where we want to save the files
-const { uploadPhoto } = require('../controllers/user.controller')
+const upload = multer({ storage })
+const { uploadPhoto, updateProfile } = require('../controllers/user.controller')
 const userRouter = express.Router()
-userRouter.post("/pictureURL", upload.single('file'), uploadPhoto)
+userRouter.put("/pictureURL", upload.single('file'), uploadPhoto)
+userRouter.put("/profile", updateProfile)
 module.exports = userRouter

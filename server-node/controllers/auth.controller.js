@@ -27,12 +27,13 @@ async function login(req, res) {
     const user = await UserModel.findOne({ email })
     if (user) {
       if (bcryptjs.compareSync(password, user.password)) {
-        const { username } = user
+        const { username, photoURL } = user
         const token = jwt.sign({ username, email }, process.env.SECRET)
         return res.status(200).contentType("application/json").json({
           token, user: {
             username,
-            email
+            email,
+            photoURL
           }
         })
       }

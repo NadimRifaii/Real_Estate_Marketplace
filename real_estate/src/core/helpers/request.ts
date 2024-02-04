@@ -37,7 +37,7 @@ export const sendFileRequest = async ({ route, data, method = "GET" }: RequestPr
       method,
       headers: {
         Authorization: `Bearer ${local("access_token")}`,
-        "Content-Type": "multipart/form-data"
+        "Content-Type": 'multipart/form-data'
       }
     })
     return response.data

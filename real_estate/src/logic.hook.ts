@@ -15,6 +15,9 @@ const useLogic = () => {
     else
       console.log("No user")
   }, [])
+  useEffect(() => {
+    local("user", JSON.stringify(user))
+  }, [user])
   return { user }
 }
 export default useLogic

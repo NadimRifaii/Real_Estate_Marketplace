@@ -11,6 +11,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser(prevState, { type, payload }: { type: string, payload: User }) {
+      console.log(payload)
       return {
         ...payload
       }

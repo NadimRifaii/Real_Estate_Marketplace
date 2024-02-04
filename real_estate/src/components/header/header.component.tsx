@@ -1,6 +1,7 @@
 import { FaSearch } from "react-icons/fa"
 import { Link } from "react-router-dom"
 import useLogic from "./logic.hook"
+import { useEffect } from "react"
 const Header = () => {
   const { user } = useLogic()
   return (
@@ -30,7 +31,7 @@ const Header = () => {
               </Link>
             </> :
               <Link to={'/profile'} >
-                <img className="rounded-full h-7 w-7 object-cover" src={`${user.photoURL}`} alt="" />
+                <img className="rounded-full h-7 w-7 object-cover" src={`${import.meta.env.VITE_BASE_URL + '/images/' + user.email + '-' + user.photoURL}`} alt="" />
               </Link>
           }
 
