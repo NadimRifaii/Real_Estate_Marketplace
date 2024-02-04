@@ -1,6 +1,8 @@
 import { FaSearch } from "react-icons/fa"
 import { Link } from "react-router-dom"
+import useLogic from "./logic.hook"
 const Header = () => {
+  const { user } = useLogic()
   return (
     <div className="header bg-slate-200 shadow-md">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3" >
@@ -18,12 +20,20 @@ const Header = () => {
           <Link to={'/'} >
             <li className="hidden sm:inline text-slate-700 hover:underline" >Home</li>
           </Link>
-          <Link to='/about'>
-            <li className="hidden sm:inline text-slate-700 hover:underline" >About</li>
-          </Link>
-          <Link to='/sign-up'>
-            <li className="hidden sm:inline text-slate-700 hover:underline" >Sign up</li>
-          </Link>
+          {
+            !user.email ? <>
+              <Link to='/about'>
+                <li className="hidden sm:inline text-slate-700 hover:underline" >About</li>
+              </Link>
+              <Link to='/sign-in'>
+                <li className="hidden sm:inline text-slate-700 hover:underline" >Sign in</li>
+              </Link>
+            </> :
+              <Link to={'/profile'} >
+                <img className="rounded-full h-7 w-7 object-cover" src={`${user.photoURL}`} alt="" />
+              </Link>
+          }
+
         </ul>
       </div>
     </div>

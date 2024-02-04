@@ -7,6 +7,7 @@ import Profile from './pages/profile/profile-page'
 import Header from './components/header/header.component'
 import useLogic from './logic.hook'
 import { useEffect } from 'react'
+import PrivateRoute from './components/privateRoute/private-route.component'
 
 function App() {
   const { user } = useLogic()
@@ -18,7 +19,9 @@ function App() {
         <Route element={<SignIn />} path='/sign-in' />
         <Route element={<SignUp />} path='/sign-up' />
         <Route element={<About />} path='/about' />
-        <Route element={<Profile />} path='/profile' />
+        <Route element={<PrivateRoute />} >
+          <Route element={<Profile />} path='/profile' />
+        </Route>
       </Routes>
     </div>
   )

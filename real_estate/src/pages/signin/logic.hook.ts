@@ -3,6 +3,7 @@ import { authDataSource } from "../../core/datasource/remoteDataSource/auth"
 import { UseDispatch, useDispatch } from "react-redux"
 import { setUser } from "../../core/datasource/localDataSource/user/userSlice"
 import local from "../../core/helpers/localStorage"
+import { useNavigate } from "react-router-dom"
 type Request = {
   email: string,
   password: string
@@ -16,6 +17,7 @@ const useLogic = () => {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
+  const navigate=useNavigate()
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRequest((prevState) => {
       const key: keyof Request = event.target.id as keyof Request
@@ -30,6 +32,7 @@ const useLogic = () => {
       setLoading(false)
       setError("")
       dispatch(setUser(response.user))
+      navigate('/')
       local("user", JSON.stringify(response.user))
     } catch (error: any) {
       setError(error.message)
