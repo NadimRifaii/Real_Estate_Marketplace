@@ -30,6 +30,7 @@ const useLogic = () => {
       const response = await authDataSource.signup(request)
       setRequest({ ...defaultCredentials })
       setLoading(false)
+      console.log(response)
     } catch (error: any) {
       setError(error.message)
       setLoading(false)

@@ -1,17 +1,11 @@
-const express = require('express')
+const express = require("express")
 const dotenv = require('dotenv')
-const cors = require('cors')
-const userRouter = require('./routes/user.route')
-const authRouter = require('./routes/auth.route')
-const handleErrorMiddleware = require('./middlewares/error.middleware')
-dotenv.config()
 const app = express()
-app.use(express.json())
+const cors = require('cors')
 app.use(cors())
-app.get("/healthy", (req, res) => {
-  res.status(200).send("Server is healthy")
-})
-app.use('/api/user', userRouter)
-app.use('/api/auth', authRouter)
-app.use(handleErrorMiddleware)
-module.exports = app
+/** Routers */
+const authRouter = require('./routes/auth.route')
+dotenv.config()
+app.use(express.json())
+app.use('/auth', authRouter)
+module.exports = app 

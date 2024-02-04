@@ -1,28 +1,30 @@
-import axios from 'axios'
-import local from './localStorage'
-
-type SendRequestRequirements = {
+import axios from "axios";
+import local from "./localStorage";
+type RequestPropsType = {
   route: string,
-  method?: "GET" | "POST" | "PUT" | "DELETE",
-  body?: {}
+  method: "GET" | "POST" | "PUT" | "DELETE",
+  data?: {}
 }
-export const sendRequest = async ({ route, method = "GET", body }: SendRequestRequirements) => {
-  const token = local("token")
+export const sendRequest = async ({ route, method = "GET", data }: RequestPropsType) => {
   const baseURL = import.meta.env.VITE_BASE_URL
+  const token = local('access_token')
   try {
     const response = await axios.request({
       url: route,
-      data: body,
+      data,
       method,
       baseURL,
       headers: {
-        "Content-Type": "application/json"
+        Authorization: `Bearer ${token}`
       }
-    });
+    })
     return response.data
   } catch (error: any) {
-    if (error.response) {
-      throw new Error(error.response.data.message)
+    if (error.response)
+      throw new Error(error.response.data.error)
+    else if (error.request) {
+      throw new Error("Network error")
     }
+
   }
 }

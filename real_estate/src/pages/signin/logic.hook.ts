@@ -13,27 +13,25 @@ const useLogic = () => {
   const [request, setRequest] = useState<Request>(defaultCredentials)
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  useEffect(() => {
-    console.log(error)
-  }, [error])
+
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRequest((prevState) => {
       const key: keyof Request = event.target.id as keyof Request
       return { ...prevState, [key]: event.target.value }
     })
   }
-  const signup = async () => {
+  const signin = async () => {
     setLoading(true)
     try {
-      const response = await authDataSource.signin(request)
-      console.log(response)
+      const response = await authDataSource.login(request)
       setRequest({ ...defaultCredentials })
       setLoading(false)
+      setError("")
     } catch (error: any) {
       setError(error.message)
       setLoading(false)
     }
   }
-  return { changeHandler, signup, error, request }
+  return { changeHandler, signin, error, request }
 }
 export default useLogic

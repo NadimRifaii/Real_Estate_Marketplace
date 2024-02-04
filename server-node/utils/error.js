@@ -1,7 +1,13 @@
-function errorHandler(statusCode, message) {
-  const error = new Error()
-  error.statusCode = statusCode
-  error.message = message
-  return error
+function handleErrors(error, res) {
+  if (error.code === 11000) {
+    const duplicateField = Object.keys(error.keyPattern)[0];
+    return res.status(400).json({ "error": `${duplicateField} is already taken` });
+  } else {
+    const message = error.message
+    return res.status(400).json({ "error": message });
+  }
 }
-module.exports = errorHandler
+
+module.exports = {
+  handleErrors,
+};

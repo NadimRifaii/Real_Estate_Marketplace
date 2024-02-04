@@ -1,28 +1,31 @@
+import local from "../../helpers/localStorage";
 import { sendRequest } from "../../helpers/request";
 
 export const authDataSource = {
   signup: async (data: {}) => {
     try {
       const response = await sendRequest({
-        route: "/api/auth/signup",
+        route: '/auth/signup',
         method: "POST",
-        body: data
+        data
       })
+      local('access_token', response.token)
       return response
     } catch (error: any) {
-      throw new Error(error.message)
+      throw new Error(error)
     }
   },
-  signin: async (data: {}) => {
+  login: async (data: {}) => {
     try {
       const response = await sendRequest({
-        route: "/api/auth/signin",
+        route: "/auth/login",
         method: "POST",
-        body: data
+        data
       })
+      local("access_token", response.token)
       return response
     } catch (error: any) {
-      throw new Error(error.message)
+      throw new Error(error)
     }
   }
 }

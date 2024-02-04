@@ -19,9 +19,7 @@ const SignUp = () => {
       <div className="flex gap-2 mt-5">
         <p>Have an account?</p>
         <Link to="/sign-in" className="text-blue-700" >
-          <span onClick={() => {
-            navigate("/sign-in")
-          }} className="text-blue-700" >Sign in</span>
+          <span className="text-blue-700" >Sign in</span>
         </Link>
       </div>
       {

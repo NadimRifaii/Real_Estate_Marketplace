@@ -1,23 +1,27 @@
-const app = require('./app.js')
 const http = require('http')
+const app = require('./app')
 const httpServer = http.createServer(app)
-const mongoose = require('mongoose')
-const PORT = process.env.PORT || 5000
-async function startServer() {
+const mongoose = require("mongoose")
+async function connectToMongo() {
+  const MONGO_URL = process.env.MONGO_URL
   mongoose.connection.once("open", () => {
-    console.log("mongo is ready")
+    console.log("Connection with mongodb opened")
   })
-  mongoose.connection.once("error", () => {
-    console.log("unable to connect")
+  mongoose.connection.once("error", (err) => {
+    console.log(err)
   })
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URL)
-    console.log(`MongoDB connected: ${conn.connection.host}`)
+    await mongoose.connect(MONGO_URL)
+    console.log("Connected to mongodb")
   } catch (error) {
     console.log(error)
   }
+}
+async function startServer() {
+  await connectToMongo()
+  const PORT = process.env.PORT
   httpServer.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`)
+    console.log("Server is running on port " + PORT)
   })
 }
 startServer()
