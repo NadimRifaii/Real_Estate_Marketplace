@@ -1,11 +1,14 @@
 import useLogic from "./logic.hook"
 const Profile = () => {
-  const { user, fileRef, currentFile, setCurrentFile, imageChangeHandler } = useLogic()
+  const { user, fileRef, currentFile, imageChangeHandler, updateProfile } = useLogic()
 
   return (
     <div className="profile p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
-      <form className="flex flex-col gap-4" >
+      <form onSubmit={(e) => {
+        e.preventDefault()
+        updateProfile()
+      }} className="flex flex-col gap-4" >
         {/* <input hidden accept="image/*,application/pdf,text/plain" ref={fileRef} type="file" name="" id="" /> */}
         <input onChange={imageChangeHandler} hidden accept="image/*,application/pdf,text/plain" ref={fileRef} type="file" name="" id="" />
         <img onClick={() => {

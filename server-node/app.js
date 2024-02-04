@@ -10,7 +10,8 @@ const userRouter = require('./routes/user.route')
 /**middlewares */
 const authMiddleware = require('./middlewares/auth.middleware')
 dotenv.config()
-app.use(express.json())
+
+app.use(express.json());
 app.use('/auth', authRouter)
 app.use('/user', authMiddleware, userRouter)
 module.exports = app 
