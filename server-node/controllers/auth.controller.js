@@ -10,7 +10,11 @@ async function signup(req, res) {
   try {
     const result = await UserModel.create({ username, email, password })
     const token = jwt.sign({ username, email }, process.env.SECRET)
-    return res.status(201).contentType("application/json").json({ "message": "User created successfully", token })
+    return res.status(201).contentType("application/json").json({
+      "message": "User created successfully", token, user: {
+        username, email
+      }
+    })
   } catch (error) {
     return handleErrors(error, res)
   }
@@ -25,7 +29,12 @@ async function login(req, res) {
       if (bcryptjs.compareSync(password, user.password)) {
         const { username } = user
         const token = jwt.sign({ username, email }, process.env.SECRET)
-        return res.status(200).contentType("application/json").json({ token })
+        return res.status(200).contentType("application/json").json({
+          token, user: {
+            username,
+            email
+          }
+        })
       }
       else
         throw new Error("Authentication failed")

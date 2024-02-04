@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { authDataSource } from "../../core/datasource/remoteDataSource/auth"
-
+import { UseDispatch, useDispatch } from "react-redux"
+import { setUser } from "../../core/datasource/localDataSource/user/userSlice"
 type Request = {
   email: string,
   password: string
@@ -13,7 +14,7 @@ const useLogic = () => {
   const [request, setRequest] = useState<Request>(defaultCredentials)
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-
+  const dispatch = useDispatch()
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRequest((prevState) => {
       const key: keyof Request = event.target.id as keyof Request
@@ -27,6 +28,7 @@ const useLogic = () => {
       setRequest({ ...defaultCredentials })
       setLoading(false)
       setError("")
+      dispatch(setUser(response.user))
     } catch (error: any) {
       setError(error.message)
       setLoading(false)

@@ -13,12 +13,12 @@ const SignIn = () => {
       }} >
         <input onChange={changeHandler} value={request.email} type="email" placeholder="email" className="border p-3 rounded-lg" id="email" />
         <input onChange={changeHandler} value={request.password} type="password" placeholder="password" className="border p-3 rounded-lg" id="password" />
-        <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:80 ">Sign up</button>
+        <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:80 ">Sign in</button>
       </form>
       <div className="flex gap-2 mt-5">
         <p>Don't Have an account?</p>
         <Link to="/sign-up" className="text-blue-700" >
-          <span  className="text-blue-700" >Sign up</span>
+          <span className="text-blue-700" >Sign up</span>
         </Link>
       </div>
       {
