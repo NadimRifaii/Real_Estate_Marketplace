@@ -9,6 +9,12 @@ const useLogic = () => {
   const imageChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentFile(e.target.files?.[0])
   }
+  const uploadPhoto=async()=>{
+    try{
+    }catch(error){
+      console.log(error)
+    }
+  }
   return { user, fileRef, currentFile, setCurrentFile, imageChangeHandler }
 }
 export default useLogic
