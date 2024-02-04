@@ -1,17 +1,16 @@
-import { useRef } from "react"
 import useLogic from "./logic.hook"
 const Profile = () => {
-  const { user } = useLogic()
-  const fileRef = useRef<HTMLInputElement | null>(null);
+  const { user, fileRef, currentFile, setCurrentFile, imageChangeHandler } = useLogic()
+
   return (
     <div className="profile p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
       <form className="flex flex-col gap-4" >
         {/* <input hidden accept="image/*,application/pdf,text/plain" ref={fileRef} type="file" name="" id="" /> */}
-        <input hidden accept="image/*,application/pdf,text/plain" ref={fileRef} type="file" name="" id="" />
+        <input onChange={imageChangeHandler} hidden accept="image/*,application/pdf,text/plain" ref={fileRef} type="file" name="" id="" />
         <img onClick={() => {
           fileRef?.current?.click()
-        }} src={`${user.photoURL}`} className=" self-center mt-2 rounded-full h-24 w-24 object-cover cursor-pointer" alt="profile image" />
+        }} src={`${!currentFile ? user.photoURL : URL.createObjectURL(currentFile)}`} className=" self-center mt-2 rounded-full h-24 w-24 object-cover cursor-pointer" alt="profile image" />
         <input type="text" placeholder="username" id="username" className="border p-3 rounded-lg" />
         <input type="text" placeholder="email" id="email" className="border p-3 rounded-lg" />
         <input type="text" placeholder="password" id="password" className="border p-3 rounded-lg" />

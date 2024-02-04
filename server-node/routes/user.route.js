@@ -1,6 +1,5 @@
 const express = require('express')
+const { uploadPhoto } = require('../controllers/user.controller')
 const userRouter = express.Router()
-userRouter.put("/pictureURL", async (req, res) => {
-  return res.status(200).json({ "test": "testing", "currentUser": req.user })
-})
+userRouter.put("/pictureURL", uploadPhoto)
 module.exports = userRouter
