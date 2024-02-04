@@ -40,7 +40,6 @@ async function login(req, res) {
         throw new Error("Authentication failed")
     } else
       throw new Error("User not found")
-
   } catch (error) {
     return handleErrors(error, res)
   }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { authDataSource } from "../../core/datasource/remoteDataSource/auth"
 import { UseDispatch, useDispatch } from "react-redux"
 import { setUser } from "../../core/datasource/localDataSource/user/userSlice"
+import local from "../../core/helpers/localStorage"
 type Request = {
   email: string,
   password: string
@@ -29,6 +30,7 @@ const useLogic = () => {
       setLoading(false)
       setError("")
       dispatch(setUser(response.user))
+      local("user", JSON.stringify(response.user))
     } catch (error: any) {
       setError(error.message)
       setLoading(false)

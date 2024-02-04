@@ -5,8 +5,11 @@ import SignUp from './pages/signup/signup-page'
 import About from './pages/about/about-page'
 import Profile from './pages/profile/profile-page'
 import Header from './components/header/header.component'
+import useLogic from './logic.hook'
+import { useEffect } from 'react'
 
 function App() {
+  const { user } = useLogic()
   return (
     <div className="page">
       <Header />
