@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import useLogic from "./logic.hook"
 import { useNavigate } from "react-router-dom"
+import Oauth from "../../components/Oauth/oauth.component"
 const SignUp = () => {
   const { changeHandler, signup, error, request } = useLogic()
   const navigate = useNavigate()
@@ -15,6 +16,7 @@ const SignUp = () => {
         <input onChange={changeHandler} value={request.email} type="email" placeholder="email" className="border p-3 rounded-lg" id="email" />
         <input onChange={changeHandler} value={request.password} type="password" placeholder="password" className="border p-3 rounded-lg" id="password" />
         <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:80 ">Sign up</button>
+        <Oauth />
       </form>
       <div className="flex gap-2 mt-5">
         <p>Have an account?</p>

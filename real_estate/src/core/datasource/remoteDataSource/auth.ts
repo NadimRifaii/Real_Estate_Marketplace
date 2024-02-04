@@ -27,5 +27,16 @@ export const authDataSource = {
     } catch (error: any) {
       throw new Error(error)
     }
+  },
+  google: async (data: {}) => {
+    try {
+      const response = await sendRequest({
+        route: "/auth/google",
+        method: "POST",
+        data
+      })
+    } catch (error: any) {
+      throw new Error(error)
+    }
   }
 }
